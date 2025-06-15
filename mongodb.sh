@@ -5,10 +5,9 @@ R="\e[31m"      #30 = black, 34 = blue, 35 = magenta, 36 = cyan, 37 = white
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-LOG_FOLDER="/var/log/shellscript-log"
-SCRIPT_NAME=$(echo $0|cut -d "." -f1)
+LOG_FOLDER="/var/log/roboshop-logs"
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
-PACKAGES=("mysql" "python" "nginx" "httpd")
 
 mkdir -p $LOG_FOLDER
 echo "The Script was executing at $(date)" | tee -a $LOG_FILE
@@ -24,7 +23,7 @@ fi
 VALIDATE (){
     if [ $1 -eq 0 ]
     then
-        echo -e "$G $2 is SUCCESSFULLY $N" | tee -a $LOG_FILE
+        echo -e "$G $2 is SUCCESS $N" | tee -a $LOG_FILE
     else
         echo -e "$R ERROR :: $2 is FAILED $N" | tee -a $LOG_FILE
         exit 1
