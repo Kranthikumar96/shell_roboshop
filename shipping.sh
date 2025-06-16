@@ -22,6 +22,9 @@ else
     echo -e "$G YOU ARE RUNNIBG WITH ROOT ACCESS $N" | tee -a $LOG_FILE
 fi
 
+echo "Please enter root password to setup"
+read -s MYSQL_ROOT_PASSWORD
+
 VALIDATE (){
     if [ $1 -eq 0 ]
     then
@@ -32,7 +35,7 @@ VALIDATE (){
     fi
 }
 
-dnf install maven -y
+dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "Installing Maven and Java"
 
 id roboshop &>>$LOG_FILE
@@ -50,7 +53,12 @@ VALIDATE $? "Creating app directory"
 curl -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading shipping"
 
-mvn clean package
+rm -rf /app/*
+cd /app 
+unzip /tmp/shipping.zip &>>$LOG_FILE
+VALIDATE $? "unzipping shipping"
+
+mvn clean package &>>$LOG_FILE
 VALIDATE $? "Packaging the shipping application"
 
 mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
