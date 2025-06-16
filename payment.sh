@@ -55,6 +55,7 @@ cd /app
 unzip /tmp/payment.zip &>>$LOG_FILE
 VALIDATE $? "unzipping payment"
 
+cd /app
 pip3 install -r requirements.txt &>>$LOG_FILE
 VALIDATE $? "Installing dependencies"
 
