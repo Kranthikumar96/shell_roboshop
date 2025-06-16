@@ -2,7 +2,7 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-000899abc99a0f48e"
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
+INSTANCES=("mongodb" "catalogue" "frontend")
 ZONE_ID="Z00303793L7AQOISRZPUF" 
 DOMAIN_NAME="kranthicart.fun"
 
