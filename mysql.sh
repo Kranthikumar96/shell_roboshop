@@ -23,7 +23,7 @@ else
 fi
 
 echo "Please enter root password to setup RoboShop@1"
-read -s MYSQL_ROOT_PASSWORD
+read MYSQL_ROOT_PASSWORD
 
 VALIDATE (){
     if [ $1 -eq 0 ]

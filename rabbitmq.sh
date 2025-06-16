@@ -23,7 +23,7 @@ else
 fi
 
 echo "Please enter rabbitmq password to setup RoboShop@1"
-read -s RABBITMQ_PASSWD
+read RABBITMQ_PASSWD
 
 VALIDATE (){
     if [ $1 -eq 0 ]
