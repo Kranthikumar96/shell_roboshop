@@ -33,7 +33,7 @@ VALIDATE (){
 }
 
 dnf module disable nodejs -y &>>$LOG_FILE
-VALIDATE $? "Disabling nodejs"
+VALIDATE $? "Disabling default nodejs"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "Enabling nodejs:20"
@@ -50,25 +50,25 @@ else
     echo -e "System user roboshop already created ... $Y SKIPPING $N"
 fi
 
-mkdir -p /app
+mkdir -p /app 
 VALIDATE $? "Creating app directory"
 
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE
-VALIDATE $? "Downloading the cart zip file"
+VALIDATE $? "Downloading cart"
 
 rm -rf /app/*
-cd /app
+cd /app 
 unzip /tmp/cart.zip &>>$LOG_FILE
-VALIDATE $? "Unziping the cart files"
+VALIDATE $? "unzipping cart"
 
 npm install &>>$LOG_FILE
-VALIDATE $? "Installing the node package manager"
+VALIDATE $? "Installing Dependencies"
 
 cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service
-VALIDATE $? "copying files from mongo.repo to cart.services"
+VALIDATE $? "Copying cart service"
 
 systemctl daemon-reload &>>$LOG_FILE
-systemctl enable cart &>>$LOG_FILE
+systemctl enable cart  &>>$LOG_FILE
 systemctl start cart
 VALIDATE $? "Starting cart"
 
