@@ -33,7 +33,7 @@ VALIDATE (){
 }
 
 dnf install python3 gcc python3-devel -y &>>$LOG_FILE
-VALIDATE $? "Installing Python3 packages"
+VALIDATE $? "Installing Python3 Packages"
 
 id roboshop &>>$LOG_FILE
 if [ $? -ne 0 ]
@@ -45,7 +45,7 @@ else
 fi
 
 mkdir -p /app 
-VALIDATE $? "Creating app directory"
+VALIDATE $? "Creating App Directory"
 
 curl -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading payment Application CODE"
