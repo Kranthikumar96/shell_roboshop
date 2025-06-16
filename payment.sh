@@ -1,8 +1,9 @@
+
 #!/bin/bash
 
 START_TIME=$(date +%s)
 USERID=$(id -u)
-R="\e[31m"      #30 = black, 34 = blue, 35 = magenta, 36 = cyan, 37 = white
+R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
@@ -12,22 +13,24 @@ LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR=$PWD
 
 mkdir -p $LOG_FOLDER
-echo "The Script was executing at $(date)" | tee -a $LOG_FILE
+echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 
-if [ $USERID -ne 0 ] #checking the file scritp having the root access or not
-then 
-    echo -e "$R ERROR :: PLEASE RUN THE SCRIPT WITH ROOT ACCESS $N" | tee -a $LOG_FILE
-    exit 1
+# check the user has root priveleges or not
+if [ $USERID -ne 0 ]
+then
+    echo -e "$R ERROR:: Please run this script with root access $N" | tee -a $LOG_FILE
+    exit 1 #give other than 0 upto 127
 else
-    echo -e "$G YOU ARE RUNNIBG WITH ROOT ACCESS $N" | tee -a $LOG_FILE
+    echo "You are running with root access" | tee -a $LOG_FILE
 fi
 
-VALIDATE (){
+# validate functions takes input as exit status, what command they tried to install
+VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo -e "$G $2 is SUCCESS $N" | tee -a $LOG_FILE
+        echo -e "$2 is ... $G SUCCESS $N" | tee -a $LOG_FILE
     else
-        echo -e "$R ERROR :: $2 is FAILED $N" | tee -a $LOG_FILE
+        echo -e "$2 is ... $R FAILURE $N" | tee -a $LOG_FILE
         exit 1
     fi
 }
@@ -55,7 +58,6 @@ cd /app
 unzip /tmp/payment.zip &>>$LOG_FILE
 VALIDATE $? "unzipping payment"
 
-cd /app
 pip3 install -r requirements.txt &>>$LOG_FILE
 VALIDATE $? "Installing dependencies"
 
