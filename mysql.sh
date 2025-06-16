@@ -22,7 +22,7 @@ else
     echo -e "$G YOU ARE RUNNIBG WITH ROOT ACCESS $N" | tee -a $LOG_FILE
 fi
 
-echo "Please enter root password to setup RoboShop@1"
+echo "Please enter root password to setup"
 read MYSQL_ROOT_PASSWORD
 
 VALIDATE (){
