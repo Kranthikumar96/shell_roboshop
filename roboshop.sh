@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AMI_ID="ami-09c813fb71547fc4f"
-SG_ID="sg-000899abc99a0f48e"
+SG_ID="sg-0572e2c4a2faec51e"
 #INSTANCES=("mongodb" "catalogue" "frontend")
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 ZONE_ID="Z00303793L7AQOISRZPUF" 
